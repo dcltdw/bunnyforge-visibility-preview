@@ -1,0 +1,32 @@
+{
+  "name": "bunnyforge-visibility-preview",
+  "displayName": "Bunnyforge Visibility Preview",
+  "description": "Colours bunnyforge campaign front matter (visibility, GM notes, reveal_when) in VS Code's built-in markdown preview.",
+  "version": "0.1.0",
+  "publisher": "dcltdw",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcltdw/bunnyforge-visibility-preview.git"
+  },
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "markdown.previewScripts": [
+      "./media/decorator.js"
+    ],
+    "markdown.previewStyles": [
+      "./media/visibility.css"
+    ]
+  },
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  }
+}
