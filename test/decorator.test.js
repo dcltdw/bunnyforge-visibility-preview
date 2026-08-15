@@ -77,3 +77,32 @@ test("a stale body stamp is removed when the table disappears", () => {
   decorate(doc);
   assert.equal(doc.body.getAttribute("data-visibility"), null);
 });
+
+test("classes the first #gm-notes heading", () => {
+  const doc = loadFixture("preview.html").window.document;
+  decorate(doc);
+  const h = doc.getElementById("gm-notes");
+  assert.ok(h.classList.contains("bfvis-gm-notes"));
+  assert.equal(doc.querySelectorAll(".bfvis-gm-notes").length, 1);
+});
+
+test("no #gm-notes heading, no class, no throw", () => {
+  const doc = loadFixture("preview-mixed.html").window.document;
+  assert.doesNotThrow(() => decorate(doc));
+  assert.equal(doc.querySelectorAll(".bfvis-gm-notes").length, 0);
+});
+
+test("a moved heading is re-marked, not double-marked", () => {
+  const doc = loadFixture("preview.html").window.document;
+  decorate(doc);
+  const old = doc.getElementById("gm-notes");
+  old.removeAttribute("id");            // simulate the preview re-slugging
+  const h2 = doc.createElement("h2");
+  h2.id = "gm-notes";
+  h2.textContent = "GM notes";
+  doc.body.appendChild(h2);
+  decorate(doc);
+  assert.equal(old.classList.contains("bfvis-gm-notes"), false);
+  assert.ok(h2.classList.contains("bfvis-gm-notes"));
+  assert.equal(doc.querySelectorAll(".bfvis-gm-notes").length, 1);
+});

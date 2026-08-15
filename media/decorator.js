@@ -53,6 +53,15 @@
     } else {
       body.removeAttribute("data-visibility");
     }
+
+    var marked = doc.querySelectorAll(".bfvis-gm-notes");
+    for (var j = 0; j < marked.length; j++) {
+      marked[j].classList.remove("bfvis-gm-notes");
+    }
+    var heading = doc.getElementById("gm-notes");
+    if (heading) {
+      heading.classList.add("bfvis-gm-notes");
+    }
   }
 
   if (typeof module !== "undefined" && module.exports) {
