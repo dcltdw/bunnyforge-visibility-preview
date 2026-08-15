@@ -64,7 +64,30 @@
     }
   }
 
+  function boot() {
+    var pending = null;
+    decorate(document);
+    var observer = new MutationObserver(function () {
+      if (pending !== null) {
+        clearTimeout(pending);
+      }
+      pending = setTimeout(function () {
+        pending = null;
+        decorate(document);
+      }, 50);
+    });
+    // Attributes deliberately unobserved: decorate() writes attributes, so
+    // observing them would re-trigger on our own work.
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
+
   if (typeof module !== "undefined" && module.exports) {
     module.exports = { decorate: decorate, norm: norm };
+  } else if (typeof document !== "undefined" && document.body) {
+    boot();
   }
 })();
