@@ -76,3 +76,10 @@ body:not(.vscode-high-contrast) .bfvis-gm-notes ~ * {
   border-left: 3px solid var(--vis-gm);
   padding-left: 8px;
 }
+
+/* Lists keep their own indentation; the tint rule's padding would
+   otherwise collapse it onto the bar. */
+body:not(.vscode-high-contrast) .bfvis-gm-notes ~ ul,
+body:not(.vscode-high-contrast) .bfvis-gm-notes ~ ol {
+  padding-left: 2em;
+}
