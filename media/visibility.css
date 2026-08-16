@@ -10,9 +10,13 @@
  * Shipped level: "high" from the bunnyforge visibility palette
  * (red = gm-only, green = player-visible, cyan = mixed).
  *
- * Every selector is guarded by body:not(.vscode-high-contrast): under
- * high-contrast themes the theme's own contrast contract wins and this
- * extension does nothing.
+ * High-contrast themes are decorated too. The shipped palette is already
+ * maximal contrast (pure hues behind pure black or white text), so there
+ * is nothing for a high-contrast theme to protect the reader from. The two
+ * high-contrast themes are asymmetric: VS Code stamps BOTH
+ * vscode-high-contrast-light and vscode-high-contrast on the light one, but
+ * never vscode-light -- so the light half below must name it explicitly, or
+ * a light high-contrast theme would inherit the dark palette.
  */
 
 :root {
@@ -26,7 +30,8 @@
   --vis-gm-tint: rgba(255, 51, 51, 0.08);
 }
 
-body.vscode-light {
+body.vscode-light,
+body.vscode-high-contrast-light {
   --vis-gm: #b91c1c;
   --vis-gm-fg: #ffffff;
   --vis-player: #15803d;
@@ -38,40 +43,40 @@ body.vscode-light {
 }
 
 /* The visibility row, reverse video in its value's colour. */
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="visibility"][data-value="gm-only"] th,
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="visibility"][data-value="gm-only"] td {
+table.frontmatter tr[data-key="visibility"][data-value="gm-only"] th,
+table.frontmatter tr[data-key="visibility"][data-value="gm-only"] td {
   background-color: var(--vis-gm);
   color: var(--vis-gm-fg);
 }
 
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="visibility"][data-value="player-visible"] th,
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="visibility"][data-value="player-visible"] td {
+table.frontmatter tr[data-key="visibility"][data-value="player-visible"] th,
+table.frontmatter tr[data-key="visibility"][data-value="player-visible"] td {
   background-color: var(--vis-player);
   color: var(--vis-player-fg);
 }
 
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="visibility"][data-value="mixed"] th,
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="visibility"][data-value="mixed"] td {
+table.frontmatter tr[data-key="visibility"][data-value="mixed"] th,
+table.frontmatter tr[data-key="visibility"][data-value="mixed"] td {
   background-color: var(--vis-mixed);
   color: var(--vis-mixed-fg);
 }
 
 /* reveal_when: dim italic, every level. */
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="reveal_when"] th,
-body:not(.vscode-high-contrast) table.frontmatter tr[data-key="reveal_when"] td {
+table.frontmatter tr[data-key="reveal_when"] th,
+table.frontmatter tr[data-key="reveal_when"] td {
   color: var(--vis-dim);
   font-style: italic;
 }
 
 /* The GM-notes separator wears the gm colour, in any file. */
-body:not(.vscode-high-contrast) .bfvis-gm-notes {
+.bfvis-gm-notes {
   background-color: var(--vis-gm);
   color: var(--vis-gm-fg);
   padding: 2px 8px;
 }
 
 /* Everything below the separator: page-scale gm tint + bar. */
-body:not(.vscode-high-contrast) .bfvis-gm-notes ~ * {
+.bfvis-gm-notes ~ * {
   background-color: var(--vis-gm-tint);
   border-left: 3px solid var(--vis-gm);
   padding-left: 8px;
@@ -79,7 +84,7 @@ body:not(.vscode-high-contrast) .bfvis-gm-notes ~ * {
 
 /* Lists keep their own indentation; the tint rule's padding would
    otherwise collapse it onto the bar. */
-body:not(.vscode-high-contrast) .bfvis-gm-notes ~ ul,
-body:not(.vscode-high-contrast) .bfvis-gm-notes ~ ol {
+.bfvis-gm-notes ~ ul,
+.bfvis-gm-notes ~ ol {
   padding-left: 2em;
 }

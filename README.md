@@ -18,8 +18,10 @@ at the top of the preview (`markdown.preview.frontMatter`, default
 | `## GM notes` heading | reverse video — red, in any file |
 | everything below `## GM notes` | subtle red tint + red left bar |
 
-Dark and light themes each get their own palette half automatically.
-Under high-contrast themes the extension does nothing, deliberately.
+Dark and light themes each get their own palette half automatically, and
+so do the two high-contrast themes — the shipped palette is already
+maximal contrast, so high-contrast themes are decorated rather than
+skipped.
 On VS Code versions before 1.121 there is no front-matter table to
 colour, so only the `## GM notes` heading and the below-separator tint
 apply; the same is true if front matter is hidden
