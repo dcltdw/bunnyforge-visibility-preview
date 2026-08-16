@@ -27,6 +27,23 @@ colour, so only the `## GM notes` heading and the below-separator tint
 apply; the same is true if front matter is hidden
 (`markdown.preview.frontMatter: "hide"`).
 
+## Install
+
+Not on the VS Code Marketplace: publishing there now requires an Azure
+subscription, which this project deliberately does not take on. Download
+the `.vsix` from the [latest
+release](https://github.com/dcltdw/bunnyforge-visibility-preview/releases/latest)
+and install it:
+
+```bash
+code --install-extension bunnyforge-visibility-preview-0.1.0.vsix
+```
+
+Or in VS Code: Extensions view → `…` menu → **Install from VSIX…**.
+
+Extensions installed from a `.vsix` do not auto-update, so watch the
+releases page if you want newer versions.
+
 ## Requirements
 
 VS Code 1.100 or later to install. The front-matter table treatment
